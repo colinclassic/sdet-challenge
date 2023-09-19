@@ -16,6 +16,8 @@
     "webdriverio": "^8.16.11"
   },
   "scripts": {
-    "wdio": "wdio run ./wdio.conf.ts"
+    "wdio": "wdio run ./wdio.conf.ts",
+    "appium": "appium",
+    "stop-server": "./scripts/kill-appium.sh"
   }
 }
