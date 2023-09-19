@@ -2,20 +2,29 @@ import { $ } from '@wdio/globals'
 
 class LoginPage {
 
-    public get inputUsername () {
-        return $('#username')
+    public get inputUsername ()  {
+        const selector = 'new UiSelector().className("android.widget.EditText").instance(0)'
+        return $(`android=${selector}`)
     }
 
     public get inputPassword () {
-        return $('#password')
+        const selector = 'new UiSelector().className("android.widget.EditText").instance(1)'
+        return $(`android=${selector}`)
     }
 
     public get inputAge () {
-        return $('#age')
+        const selector = 'new UiSelector().className("android.widget.EditText").instance(2)'
+        return $(`android=${selector}`)
     }
 
     public get btnSubmit () {
-        return $('button[type="submit"]')
+        const selector = 'new UiSelector().className("android.widget.Button")'
+        return $(`android=${selector}`)
+    }
+
+    public get messageError () {
+        const selector = 'new UiSelector().className("android.widget.TextView")'
+        return $(`android=${selector}`)
     }
 
     public async login (username: string, password: string, age: string) {
@@ -23,6 +32,10 @@ class LoginPage {
         await this.inputPassword.setValue(password)
         await this.inputAge.setValue(age)
         await this.btnSubmit.click()
+    }
+
+    public async getError () {
+        return await this.messageError.getText
     }
 
 }
