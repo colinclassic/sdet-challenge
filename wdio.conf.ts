@@ -32,7 +32,7 @@ export const config: Options.Testrunner = {
     // will be called from there.
     //
     specs: [
-        './src/test'
+        './src/test/*'
     ],
     // Patterns to exclude.
     exclude: [
@@ -62,12 +62,11 @@ export const config: Options.Testrunner = {
     //
     capabilities: [{
         // capabilities for local Appium web tests on an Android Emulator
-        platformName: 'Android',
-        browserName: 'Chrome',
-        'appium:deviceName': 'Android GoogleAPI Emulator',
-        'appium:platformVersion': '12.0',
-        'appium:automationName': 'UiAutomator2'
-    }],
+    "platformName": "android",
+    "appium:deviceName": "emulator-5554",
+    "appium:automationName": "uiautomator2",
+    "appium:app": "/Users/colinsullivan/projects/sdet-challenge/app-debug.apk"
+  }],
 
     //
     // ===================
@@ -116,14 +115,8 @@ export const config: Options.Testrunner = {
     // Services take over a specific job you don't want to take care of. They enhance
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
-    services: ['appium', 'vscode'],
+    services: ['appium'],
 
-    // Framework you want to run your specs with.
-    // The following are supported: Mocha, Jasmine, and Cucumber
-    // see also: https://webdriver.io/docs/frameworks
-    //
-    // Make sure you have the wdio adapter package for the specific framework installed
-    // before running any tests.
     framework: 'mocha',
     //
     // The number of times to retry the entire specfile when it fails as a whole
@@ -138,7 +131,7 @@ export const config: Options.Testrunner = {
     // Test reporter for stdout.
     // The only one supported by default is 'dot'
     // see also: https://webdriver.io/docs/dot-reporter
-    reporters: ['spec','junit','json','mochawesome'],
+    reporters: ['spec','junit'],
 
     
     //

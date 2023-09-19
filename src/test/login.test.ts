@@ -7,3 +7,17 @@
 
 // valid age
 // 1 - 99
+
+
+
+
+/* cases
+
+success
+
+fail on username
+fail on password
+fail on age
+
+
+*/

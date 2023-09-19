@@ -1,14 +1,12 @@
 import { expect } from '@wdio/globals'
 import LoginPage from '../pages/login.page'
-import SecurePage from '../pages/secure.page'
+import loginPage from '../pages/login.page'
 
 describe('My Login application', () => {
     it('should login with valid credentials', async () => {
-        await LoginPage.open()
 
-        await LoginPage.login('tomsmith', 'SuperSecretPassword!')
-        await expect(SecurePage.flashAlert).toBeExisting()
-        await expect(SecurePage.flashAlert).toHaveTextContaining(
+        await LoginPage.login('tomsmith', 'SuperSecretPassword!', '3')
+        await expect(loginPage).toHaveTextContaining(
             'You logged into a secure area!')
     })
 })
