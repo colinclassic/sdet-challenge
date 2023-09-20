@@ -63,9 +63,9 @@ export const config: Options.Testrunner = {
     capabilities: [{
         // capabilities for local Appium web tests on an Android Emulator
     "platformName": "android",
-    "appium:deviceName": "emulator-5554",
+    "appium:deviceName": "<from adb devices>",
     "appium:automationName": "uiautomator2",
-    "appium:app": "/Users/colinsullivan/projects/sdet-challenge/app-debug.apk"
+    "appium:app": "<absolute path to apk>"
   }],
 
     //
@@ -131,7 +131,12 @@ export const config: Options.Testrunner = {
     // Test reporter for stdout.
     // The only one supported by default is 'dot'
     // see also: https://webdriver.io/docs/dot-reporter
-    reporters: ['spec','junit'],
+    reporters: ['spec',['junit', {
+        outputDir: './reports',
+        outputFileFormat: function(options) { // optional
+            return `results-junit.xml`
+        }
+    }]],
 
     
     //
