@@ -23,5 +23,5 @@ Install & set up
 
 To run tests
 - Start the emulator manually through AVD
-- Run `npm run wdio
-`
+- Run `npm run wdio`
+
