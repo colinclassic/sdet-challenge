@@ -23,7 +23,7 @@ class LoginPage {
     }
 
     public get messageError () {
-        const selector = 'new UiSelector().className("android.widget.TextView")'
+        const selector = 'new UiSelector().className("android.widget.TextView").instance(4)'
         return $(`android=${selector}`)
     }
 
@@ -35,7 +35,13 @@ class LoginPage {
     }
 
     public async getError () {
-        return await this.messageError.getText
+        return await this.messageError.getText()
+    }
+
+    public async clearFields () {
+        await this.inputUsername.clearValue()
+        await this.inputPassword.clearValue()
+        await this.inputAge.clearValue()
     }
 
 }

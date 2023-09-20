@@ -2,22 +2,21 @@ import { expect } from '@wdio/globals'
 import loginPage from '../pages/login.page'
 import welcomePage from '../pages/welcome.page'
 import constants from '../data/constants'
+import { beforeEach } from 'mocha'
 
 describe('login process', () => {
-    it('should login with valid credentials', async () => {
-         const { username, password, age } = constants.validData
- 
-        await loginPage.login(username, password, age)
-        await expect(welcomePage.displayMessage).toHaveTextContaining(
-            'Welcome ' + username)
-    })
+
+    beforeEach('reset app', async () => (
+        await loginPage.clearFields()
+    ))
 
     it('should error with invalid username', async () => {
         const { password, age } = constants.validData
         const { username } = constants.invalidData
 
         await loginPage.login(username, password, age)
-        expect(loginPage.getError).toEqual(constants.errors.username)
+        const error = await loginPage.getError()
+        await expect(error).toEqual(constants.errors.username)
     })
 
     it('should error with invalid password', async () => {
@@ -25,7 +24,8 @@ describe('login process', () => {
         const { password } = constants.invalidData
 
         await loginPage.login(username, password, age)
-        expect(loginPage.getError).toEqual(constants.errors.password)        
+        const error = await loginPage.getError()
+        await expect(error).toEqual(constants.errors.password)        
     })
 
     it('should error with invalid age', async () => {
@@ -33,7 +33,16 @@ describe('login process', () => {
         const { age } = constants.invalidData
 
         await loginPage.login(username, password, age)
-        expect(loginPage.getError).toEqual(constants.errors.age)   
+        const error = await loginPage.getError()
+        await expect(error).toEqual(constants.errors.age)   
     })
+
+    it('should login with valid credentials', async () => {
+        const { username, password, age } = constants.validData
+
+       await loginPage.login(username, password, age)
+       const message = await welcomePage.displayMessage.getText()
+       await expect(message).toEqual('Welcome ' + username)
+   })
 })
 
